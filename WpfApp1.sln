@@ -1,25 +1,51 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.7.34202.233
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{382B5D94-11B9-4F50-8159-D1AEA191C1BD}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{382B5D94-11B9-4F50-8159-D1AEA191C1BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{382B5D94-11B9-4F50-8159-D1AEA191C1BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{382B5D94-11B9-4F50-8159-D1AEA191C1BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{382B5D94-11B9-4F50-8159-D1AEA191C1BD}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {AD0C254B-9FF6-4890-8C6B-1A3E8C0FB5C8}
-	EndGlobalSection
-EndGlobal
+internal class Task
+{
+    private string title;
+    private string description;
+    private int priority;
+    private string tag;
+    private bool completed;
+   
+
+   public Task (string title, string description, int priority,string tag,bool completed)
+    {
+        this.title = title;
+        this.description = description;
+        this.priority = priority;
+        this.tag = tag;
+        this.completed = completed;
+    }
+
+    public string Title { get => title ;  }
+    public string Description { get => description ; }
+    public int Priority { get => priority ; }
+    public string Tag { get => tag ; } 
+    public bool Completed { get => completed ; }
+
+    public string[] remplir_taks()
+    {
+    string[] remplir = new string[4];
+
+    string title;
+    string description;
+    int priority;
+    string tag;
+    bool completed;
+    Console.WriteLine("enter votre titre");
+    title=Console.ReadLine();
+    description=Console.ReadLine();
+    priority=Convert.ToInt32(Console.ReadLine());
+    tag=Console.ReadLine();
+    completed=false;
+
+        remplir[0] = title;
+        remplir[1] = description;
+        remplir[2] = Convert.ToString(priority);
+        remplir[3] = Convert.ToString(priority);
+        remplir[4] = Convert.ToString(completed);
+
+        return remplir;
+    }
+        
+
+}
