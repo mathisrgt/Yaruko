@@ -1,10 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Xml.Serialization; // Utilisation de XmlSerializer pour la sérialisation XML
 
 public class TaskManager
 {
     private List<CustomTask> tasks = new List<CustomTask>();
+    private string dataFilePath = "tasks.xml"; // Nom du fichier de données
+
+    public TaskManager()
+    {
+        LoadTasks(); // Charger les tâches depuis le fichier lors du démarrage
+    }
 
     public void AddTask(CustomTask task)
     {
@@ -88,6 +96,45 @@ public class TaskManager
         foreach (var task in tasksPassedDeadline)
         {
             Console.WriteLine($"Titre : {task.Title}, Deadline : {task.Deadline}");
+        }
+    }
+
+    // Méthode pour sauvegarder les tâches dans un fichier
+    public void SaveTasks()
+    {
+        try
+        {
+            using (FileStream fs = new FileStream(dataFilePath, FileMode.Create))
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(List<CustomTask>));
+                serializer.Serialize(fs, tasks);
+                Console.WriteLine("Tâches sauvegardées avec succès.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erreur lors de la sauvegarde des tâches : {ex.Message}");
+        }
+    }
+
+    // Méthode pour charger les tâches depuis un fichier
+    public void LoadTasks()
+    {
+        if (File.Exists(dataFilePath))
+        {
+            try
+            {
+                using (FileStream fs = new FileStream(dataFilePath, FileMode.Open))
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(List<CustomTask>));
+                    tasks = (List<CustomTask>)serializer.Deserialize(fs);
+                    Console.WriteLine("Tâches chargées avec succès.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur lors du chargement des tâches : {ex.Message}");
+            }
         }
     }
 }
