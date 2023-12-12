@@ -9,12 +9,12 @@ public class CustomTask
     public List<string> Tags { get; set; }
     public DateTime Deadline { get; set; }
 
-    public CustomTask(string title, string description, int priority, DateTime deadline)
+    public CustomTask(string title, string description, int priority)
     {
         Title = title;
         Description = description;
         Priority = priority;
         Tags = new List<string>();
-        Deadline = deadline;
+        Deadline = DateTime.MinValue; // Initialisation avec une valeur par défaut
     }
 }

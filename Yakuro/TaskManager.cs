@@ -48,6 +48,20 @@ public class TaskManager
         }
     }
 
+    public void AddDeadlineToTask(string title, DateTime deadline)
+    {
+        CustomTask task = tasks.FirstOrDefault(t => t.Title == title);
+        if (task != null)
+        {
+            task.Deadline = deadline;
+            Console.WriteLine($"Deadline ajoutée à la tâche '{title}'.");
+        }
+        else
+        {
+            Console.WriteLine($"Tâche '{title}' introuvable.");
+        }
+    }
+
     public void ShowTasksByTag(string tag)
     {
         var taggedTasks = tasks.Where(task => task.Tags.Contains(tag));

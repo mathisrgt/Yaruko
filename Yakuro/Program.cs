@@ -28,10 +28,8 @@ public class Program
                     string description = Console.ReadLine();
                     Console.Write("Entrez la priorité de la tâche : ");
                     int priority = int.Parse(Console.ReadLine());
-                    Console.Write("Entrez la deadline de la tâche (au format 'YYYY-MM-DD HH:mm') : ");
-                    DateTime deadline = DateTime.Parse(Console.ReadLine());
 
-                    CustomTask newTask = new CustomTask(title, description, priority, deadline);
+                    CustomTask newTask = new CustomTask(title, description, priority);
                     taskManager.AddTask(newTask);
                     Console.WriteLine("Tâche ajoutée avec succès.");
                     break;
