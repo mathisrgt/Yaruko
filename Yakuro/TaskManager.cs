@@ -33,6 +33,40 @@ public class TaskManager
         }
     }
 
+    public void ModifyTask(string title)
+    {
+        CustomTask taskToModify = tasks.FirstOrDefault(t => t.Title == title);
+        if (taskToModify != null)
+        {
+            Console.WriteLine($"Tâche '{title}' trouvée. Entrez les nouvelles informations :");
+
+            Console.Write("Nouveau titre : ");
+            string newTitle = Console.ReadLine().ToUpper();
+            Console.Write("Nouvelle description : ");
+            string newDescription = Console.ReadLine();
+            Console.Write("Nouvelle priorité : ");
+            int newPriority;
+            while (!int.TryParse(Console.ReadLine(), out newPriority))
+            {
+                Console.WriteLine("Veuillez entrer un nombre valide pour la priorité.");
+                Console.Write("Nouvelle priorité : ");
+            }
+
+            // Vous pouvez ajouter des options pour modifier d'autres propriétés (tags, deadline, etc.) si nécessaire.
+
+            taskToModify.Title = newTitle;
+            taskToModify.Description = newDescription;
+            taskToModify.Priority = newPriority;
+
+            Console.WriteLine($"Tâche '{title}' modifiée avec succès.");
+        }
+        else
+        {
+            Console.WriteLine($"Tâche '{title}' introuvable.");
+        }
+    }
+
+
     public void ShowTasksByPriority()
     {
         var sortedTasks = tasks.OrderBy(task => task.Priority);
@@ -70,6 +104,27 @@ public class TaskManager
         }
     }
 
+    public void ShowAllTasks()
+    {
+        Console.WriteLine("Tâches existantes :");
+        foreach (var task in tasks)
+        {
+            Console.WriteLine($"Titre : {task.Title}, Description : {task.Description}, Priorité : {task.Priority}");
+
+            if (task.Tags.Count > 0)
+            {
+                Console.WriteLine("Tags : " + string.Join(", ", task.Tags));
+            }
+
+            if (task.Deadline != DateTime.MinValue)
+            {
+                Console.WriteLine($"Deadline : {task.Deadline}");
+            }
+
+            Console.WriteLine(); // Ajoute une ligne vide entre chaque tâche pour une meilleure lisibilité
+        }
+    }
+
     public void ShowTasksByTag(string tag)
     {
         var taggedTasks = tasks.Where(task => task.Tags.Contains(tag));
@@ -98,6 +153,7 @@ public class TaskManager
             Console.WriteLine($"Titre : {task.Title}, Deadline : {task.Deadline}");
         }
     }
+
 
     // Méthode pour sauvegarder les tâches dans un fichier
     public void SaveTasks()

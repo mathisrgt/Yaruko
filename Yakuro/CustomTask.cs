@@ -17,4 +17,10 @@ public class CustomTask
         Tags = new List<string>();
         Deadline = DateTime.MinValue; // Initialisation avec une valeur par défaut
     }
+
+    public CustomTask()
+    {
+        Tags = new List<string>();
+        Deadline = DateTime.MinValue; // Initialisation avec une valeur par défaut
+    }
 }
